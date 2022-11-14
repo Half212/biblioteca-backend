@@ -17,7 +17,6 @@ public class WebConfig {
     @Bean
     public FilterRegistrationBean<CorsFilter> corsFilterFilterRegistrationBean() {
         List<String> all = Arrays.asList("*");
-
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOrigins(Arrays.asList("https://biblio.herokuapp.com/",
                 "http://localhost:4200","https://you.server.domain.com"));
