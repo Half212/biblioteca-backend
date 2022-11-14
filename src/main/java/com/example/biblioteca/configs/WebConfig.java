@@ -9,21 +9,22 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @Configuration
 public class WebConfig {
 
     @Bean
-    public FilterRegistrationBean<CorsFilter> corsFilterFilterRegistrationBean() {
-        List<String> all = Arrays.asList("*");
+    public UrlBasedCorsConfigurationSource corsFilterFilterRegistrationBean() {
+        List<String> all = Collections.singletonList("*");
 
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(Arrays.asList("https://biblio.herokuapp.com/",
+        corsConfiguration.setAllowedOrigins(Arrays.asList("https://biblio.herokuapp.com",
                 "http://localhost:4200","https://you.server.domain.com"));
-        corsConfiguration.setAllowedHeaders(all);
-        corsConfiguration.setExposedHeaders(all);
-        corsConfiguration.setAllowedMethods(all);
+        corsConfiguration.setAllowedHeaders(Collections.singletonList("*"));
+        corsConfiguration.setExposedHeaders(Collections.singletonList("*"));
+        corsConfiguration.setAllowedMethods(Collections.singletonList("*"));
         corsConfiguration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -33,6 +34,6 @@ public class WebConfig {
 
         filter.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
-        return filter;
+        return source;
     }
 }
